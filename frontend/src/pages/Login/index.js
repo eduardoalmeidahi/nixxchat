@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
   },
   leftPanel: {
     flex: 1.1,
-    background: "radial-gradient(circle at 0% 0%, rgba(32, 180, 98, 0.04) 0%, rgba(255, 255, 255, 0) 50%), radial-gradient(circle at 100% 100%, rgba(32, 180, 98, 0.04) 0%, rgba(255, 255, 255, 0) 50%), #ffffff",
+    backgroundColor: "#ffffff",
     padding: theme.spacing(8),
     display: "flex",
     flexDirection: "column",
@@ -58,34 +58,44 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-    background: "radial-gradient(circle at 50% 50%, #0c1a30 0%, #050b14 100%)",
+    background: "radial-gradient(circle at 80% 20%, rgba(32, 180, 98, 0.12) 0%, transparent 50%), radial-gradient(circle at 20% 80%, rgba(99, 102, 241, 0.12) 0%, transparent 50%), #060f1e",
     padding: theme.spacing(4),
     position: "relative",
     overflow: "hidden",
-    // Glowing circles in corners
-    "&::before": {
-      content: '""',
-      position: "absolute",
-      top: "-10%",
-      right: "-10%",
-      width: "350px",
-      height: "350px",
-      borderRadius: "50%",
-      background: "radial-gradient(circle, rgba(32, 180, 98, 0.08) 0%, rgba(32, 180, 98, 0) 70%)",
-      filter: "blur(40px)",
-      zIndex: 1,
+  },
+  bgOrb1: {
+    position: "absolute",
+    top: "10%",
+    right: "10%",
+    width: "250px",
+    height: "250px",
+    borderRadius: "50%",
+    background: "radial-gradient(circle, rgba(32, 180, 98, 0.15) 0%, rgba(32, 180, 98, 0) 70%)",
+    filter: "blur(40px)",
+    zIndex: 1,
+    animation: "$float 6s ease-in-out infinite",
+  },
+  bgOrb2: {
+    position: "absolute",
+    bottom: "10%",
+    left: "10%",
+    width: "300px",
+    height: "300px",
+    borderRadius: "50%",
+    background: "radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, rgba(99, 102, 241, 0) 70%)",
+    filter: "blur(50px)",
+    zIndex: 1,
+    animation: "$float 8s ease-in-out infinite alternate",
+  },
+  "@keyframes float": {
+    "0%": {
+      transform: "translateY(0px)",
     },
-    "&::after": {
-      content: '""',
-      position: "absolute",
-      bottom: "-10%",
-      left: "-10%",
-      width: "350px",
-      height: "350px",
-      borderRadius: "50%",
-      background: "radial-gradient(circle, rgba(32, 180, 98, 0.08) 0%, rgba(32, 180, 98, 0) 70%)",
-      filter: "blur(40px)",
-      zIndex: 1,
+    "50%": {
+      transform: "translateY(-15px)",
+    },
+    "100%": {
+      transform: "translateY(0px)",
     },
   },
   leftContentWrapper: {
@@ -95,9 +105,18 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "flex-start",
   },
   logoImg: {
-    height: "90px",
-    marginBottom: theme.spacing(6),
+    height: "100px",
+    marginBottom: theme.spacing(2),
     objectFit: "contain",
+    alignSelf: "flex-start",
+  },
+  brandText: {
+    fontSize: "12px",
+    color: "#20B462",
+    fontWeight: "700",
+    textTransform: "uppercase",
+    letterSpacing: "3px",
+    marginBottom: theme.spacing(4),
     alignSelf: "flex-start",
   },
   heroTitle: {
@@ -326,11 +345,16 @@ const Login = () => {
     <div className={classes.root}>
       <CssBaseline />
       
-      {/* PAINEL ESQUERDO (HERO - FUNDO BRANCO) */}
+      {/* PAINEL ESQUERDO (HERO - FUNDO BRANCO PURO) */}
       <div className={classes.leftPanel}>
         <div className={classes.leftContentWrapper}>
-          {/* LOGO EM DESTAQUE */}
+          {/* LOGO EM DESTAQUE E AUMENTADA */}
           <img className={classes.logoImg} src={logo} alt="Nixx Chat" />
+          
+          {/* MARCA NIXX SUITE SOFTWARE HOUSE */}
+          <Typography className={classes.brandText}>
+            Nixx Suite Software House
+          </Typography>
 
           {/* CONTEÚDO CENTRAL */}
           <Typography variant="h1" className={classes.heroTitle}>
@@ -376,8 +400,12 @@ const Login = () => {
         </div>
       </div>
 
-      {/* PAINEL DIREITO (FORMULÁRIO - FUNDO ESCURO) */}
+      {/* PAINEL DIREITO (FORMULÁRIO - FUNDO ESCURO COM CHARME) */}
       <div className={classes.rightPanel}>
+        {/* Efeitos de Fundo (Orbs Luminosas / Círculos de Charme) */}
+        <div className={classes.bgOrb1}></div>
+        <div className={classes.bgOrb2}></div>
+
         <div className={classes.loginCard}>
           <Typography variant="h2" className={classes.cardTitle}>
             Bem-vindo de volta!
