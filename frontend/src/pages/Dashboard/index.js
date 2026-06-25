@@ -57,50 +57,6 @@ import { ChartsDate } from "./ChartsDate";
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    paddingTop: theme.spacing(1),
-    paddingBottom: theme.padding,
-    paddingLeft: theme.spacing(1),
-    paddingRight: theme.spacing(2),
-  },
-  fixedHeightPaper: {
-    padding: theme.spacing(2),
-    display: "flex",
-    flexDirection: "column",
-    height: 240,
-    overflowY: "auto",
-    ...theme.scrollbarStyles,
-  },
-  cardAvatar: {
-    fontSize: "55px",
-    color: grey[500],
-    backgroundColor: "#ffffff",
-    width: theme.spacing(7),
-    height: theme.spacing(7),
-  },
-  cardTitle: {
-    fontSize: "18px",
-    color: blue[700],
-  },
-  cardSubtitle: {
-    color: grey[600],
-    fontSize: "14px",
-  },
-  alignRight: {
-    textAlign: "right",
-  },
-  fullWidth: {
-    width: "100%",
-  },
-  selectContainer: {
-    width: "100%",
-    textAlign: "left",
-  },
-  iframeDashboard: {
-    width: "100%",
-    height: "calc(100vh - 64px)",
-    border: "none",
-  },
-  container: {
     paddingTop: theme.spacing(4),
     paddingBottom: theme.spacing(4),
   },
@@ -111,125 +67,103 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     height: 240,
   },
-  customFixedHeightPaper: {
-    padding: theme.spacing(2),
+  fixedHeightPaper2: {
+    padding: theme.spacing(3),
     display: "flex",
     overflow: "auto",
     flexDirection: "column",
-    height: 120,
+    borderRadius: "12px",
+    boxShadow: "0 4px 20px 0 rgba(0, 0, 0, 0.05)",
+    border: `1px solid ${theme.palette.type === "dark" ? "rgba(255, 255, 255, 0.05)" : "rgba(0, 0, 0, 0.05)"}`,
+    backgroundColor: theme.palette.background.paper,
   },
-  customFixedHeightPaperLg: {
-    padding: theme.spacing(2),
+  filterPaper: {
+    padding: theme.spacing(3),
     display: "flex",
-    overflow: "auto",
-    flexDirection: "column",
-    height: "100%",
+    alignItems: "center",
+    borderRadius: "12px",
+    boxShadow: "0 4px 20px 0 rgba(0, 0, 0, 0.05)",
+    border: `1px solid ${theme.palette.type === "dark" ? "rgba(255, 255, 255, 0.05)" : "rgba(0, 0, 0, 0.05)"}`,
+    backgroundColor: theme.palette.background.paper,
+    marginBottom: theme.spacing(4),
   },
-    card0: {
-    padding: theme.spacing(2),
+  card: {
+    padding: theme.spacing(2.5),
     display: "flex",
-    overflow: "auto",
-    flexDirection: "column",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
     height: "100%",
-    backgroundColor: "#9400D3",
-    color: "#eee",
+    borderRadius: "12px",
+    boxShadow: "0 4px 20px 0 rgba(0, 0, 0, 0.05)",
+    border: `1px solid ${theme.palette.type === "dark" ? "rgba(255, 255, 255, 0.05)" : "rgba(0, 0, 0, 0.05)"}`,
+    backgroundColor: theme.palette.background.paper,
+    transition: "transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out",
+    "&:hover": {
+      transform: "translateY(-4px)",
+      boxShadow: "0 8px 24px 0 rgba(0, 0, 0, 0.1)",
+    },
   },
-      card00: {
-    padding: theme.spacing(2),
+  iconContainer: {
+    borderRadius: "50%",
+    padding: "12px",
     display: "flex",
-    overflow: "auto",
-    flexDirection: "column",
-    height: "100%",
-    backgroundColor: "#8B1C62",
-    color: "#eee",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "56px",
+    height: "56px",
+  },
+  cardTitle: {
+    fontSize: "13px",
+    fontWeight: "600",
+    color: theme.palette.text.secondary,
+    textTransform: "uppercase",
+    letterSpacing: "0.5px",
+    marginBottom: theme.spacing(1),
+  },
+  cardVal: {
+    fontSize: "28px",
+    fontWeight: "700",
+    color: theme.palette.text.primary,
+  },
+  card0: {
+    borderLeft: "5px solid #15aabf",
+  },
+  card00: {
+    borderLeft: "5px solid #ae3ec9",
   },
   card1: {
-    padding: theme.spacing(2),
-    display: "flex",
-    overflow: "auto",
-    flexDirection: "column",
-    height: "100%",
-    backgroundColor: "#11bf42",
-    color: "#eee",
+    borderLeft: "5px solid #20B462",
   },
   card2: {
-    padding: theme.spacing(2),
-    display: "flex",
-    overflow: "auto",
-    flexDirection: "column",
-    height: "100%",
-    backgroundColor: "#748e9d",
-    color: "#eee",
+    borderLeft: "5px solid #ff922b",
   },
   card3: {
-    padding: theme.spacing(2),
-    display: "flex",
-    overflow: "auto",
-    flexDirection: "column",
-    height: "100%",
-    backgroundColor: "#e53935",
-    color: "#eee",
+    borderLeft: "5px solid #f03e3e",
   },
   card4: {
-    padding: theme.spacing(2),
-    display: "flex",
-    overflow: "auto",
-    flexDirection: "column",
-    height: "100%",
-    backgroundColor: "#cc991b",
-    color: "#eee",
-  },
-  card5: {
-    padding: theme.spacing(2),
-    display: "flex",
-    overflow: "auto",
-    flexDirection: "column",
-    height: "100%",
-    backgroundColor: "#47a7f6",
-    color: "#eee",
-  },
-  card6: {
-    padding: theme.spacing(2),
-    display: "flex",
-    overflow: "auto",
-    flexDirection: "column",
-    height: "100%",
-    backgroundColor: "#b87d77",
-    color: "#eee",
-  },
-  card7: {
-    padding: theme.spacing(2),
-    display: "flex",
-    overflow: "auto",
-    flexDirection: "column",
-    height: "100%",
-    backgroundColor: "#7bc780",
-    color: "#eee",
+    borderLeft: "5px solid #fab005",
   },
   card8: {
-    padding: theme.spacing(2),
-    display: "flex",
-    overflow: "auto",
-    flexDirection: "column",
-    height: "100%",
-    backgroundColor: "#b05c38",
-    color: "#eee",
+    borderLeft: "5px solid #1c7ed6",
   },
   card9: {
-    padding: theme.spacing(2),
-    display: "flex",
-    overflow: "auto",
-    flexDirection: "column",
-    height: "100%",
-    backgroundColor: "#bd3c58",
-    color: "#eee",
+    borderLeft: "5px solid #e64980",
   },
-  fixedHeightPaper2: {
-    padding: theme.spacing(2),
+  alignRight: {
+    textAlign: "right",
     display: "flex",
-    overflow: "auto",
-    flexDirection: "column",
+    justifyContent: "flex-end",
+    alignItems: "center",
   },
+  fullWidth: {
+    width: "100%",
+  },
+  selectContainer: {
+    width: "100%",
+    textAlign: "left",
+  },
+
 }));
 
 const Dashboard = () => {
@@ -413,379 +347,243 @@ const Dashboard = () => {
   return (
     <div>
       <Container maxWidth="lg" className={classes.container}>
-        <Grid container spacing={3} justifyContent="flex-end">
-		
-				  {/* FILTROS */}
-          <Grid item xs={12} sm={6} md={4}>
-            <FormControl className={classes.selectContainer}>
-              <InputLabel id="period-selector-label">Tipo de Filtro</InputLabel>
-              <Select
-                labelId="period-selector-label"
-                value={filterType}
-                onChange={(e) => handleChangeFilterType(e.target.value)}
-              >
-                <MenuItem value={1}>Filtro por Data</MenuItem>
-                <MenuItem value={2}>Filtro por Período</MenuItem>
-              </Select>
-              <FormHelperText>Selecione o período desejado</FormHelperText>
-            </FormControl>
-          </Grid>
+        <Grid container spacing={3}>
 
-          {renderFilters()}
-
-          {/* BOTAO FILTRAR */}
-          <Grid item xs={12} className={classes.alignRight}>
-            <ButtonWithSpinner
-              loading={loading}
-              onClick={() => fetchData()}
-              variant="contained"
-              color="primary"
-            >
-              Filtrar
-            </ButtonWithSpinner>
-          </Grid>
-		
-		{/* CONEXÕES */}
-		 {user.super && (	  
-		  <Grid item xs={12} sm={6} md={4}>
-            <Paper
-              className={classes.card0}
-              style={{ overflow: "hidden" }}
-              elevation={4}
-            >
-              <Grid container spacing={3}>
-                <Grid item xs={8}>
-                  <Typography
-                    component="h3"
-                    variant="h6"
-                    paragraph
-                  >
-                    Conexões Ativas
-                  </Typography>
-                  <Grid item>
-                    <Typography
-                      component="h1"
-                      variant="h4"
+          {/* FILTROS CARD UNIFICADO */}
+          <Grid item xs={12}>
+            <Paper className={classes.filterPaper} elevation={0}>
+              <Grid container spacing={3} alignItems="center">
+                <Grid item xs={12} sm={6} md={3}>
+                  <FormControl className={classes.selectContainer}>
+                    <InputLabel id="filter-type-label">Tipo de Filtro</InputLabel>
+                    <Select
+                      labelId="filter-type-label"
+                      value={filterType}
+                      onChange={(e) => handleChangeFilterType(e.target.value)}
                     >
+                      <MenuItem value={1}>Filtro por Data</MenuItem>
+                      <MenuItem value={2}>Filtro por Período</MenuItem>
+                    </Select>
+                  </FormControl>
+                </Grid>
+
+                {filterType === 1 ? (
+                  <>
+                    <Grid item xs={12} sm={6} md={3}>
+                      <TextField
+                        label="Data Inicial"
+                        type="date"
+                        value={dateFrom}
+                        onChange={(e) => setDateFrom(e.target.value)}
+                        className={classes.fullWidth}
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                      />
+                    </Grid>
+                    <Grid item xs={12} sm={6} md={3}>
+                      <TextField
+                        label="Data Final"
+                        type="date"
+                        value={dateTo}
+                        onChange={(e) => setDateTo(e.target.value)}
+                        className={classes.fullWidth}
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                      />
+                    </Grid>
+                  </>
+                ) : (
+                  <Grid item xs={12} sm={6} md={6}>
+                    <FormControl className={classes.selectContainer}>
+                      <InputLabel id="period-selector-label">Período</InputLabel>
+                      <Select
+                        labelId="period-selector-label"
+                        id="period-selector"
+                        value={period}
+                        onChange={(e) => handleChangePeriod(e.target.value)}
+                      >
+                        <MenuItem value={0}>Nenhum selecionado</MenuItem>
+                        <MenuItem value={3}>Últimos 3 dias</MenuItem>
+                        <MenuItem value={7}>Últimos 7 dias</MenuItem>
+                        <MenuItem value={15}>Últimos 15 dias</MenuItem>
+                        <MenuItem value={30}>Últimos 30 dias</MenuItem>
+                        <MenuItem value={60}>Últimos 60 dias</MenuItem>
+                        <MenuItem value={90}>Últimos 90 dias</MenuItem>
+                      </Select>
+                    </FormControl>
+                  </Grid>
+                )}
+
+                <Grid item xs={12} sm={12} md={3} className={classes.alignRight}>
+                  <ButtonWithSpinner
+                    loading={loading}
+                    onClick={() => fetchData()}
+                    variant="contained"
+                    color="primary"
+                    style={{ height: "40px", width: "100%", maxWidth: "200px" }}
+                  >
+                    Filtrar
+                  </ButtonWithSpinner>
+                </Grid>
+              </Grid>
+            </Paper>
+          </Grid>
+
+          {/* CONEXÕES */}
+          {user.super && (
+            <Grid item xs={12} sm={6} md={4}>
+              <Paper className={`${classes.card} ${classes.card0}`} elevation={0}>
+                <div style={{ display: "flex", width: "100%", justifyContent: "space-between", alignItems: "center" }}>
+                  <div>
+                    <Typography className={classes.cardTitle}>
+                      Conexões Ativas
+                    </Typography>
+                    <Typography className={classes.cardVal}>
                       {counters.totalWhatsappSessions}
                     </Typography>
-                  </Grid>
-                </Grid>
-                <Grid item xs={2}>
-                  <MobileFriendlyIcon
-                    style={{
-                      fontSize: 100,
-                      color: "#fff",
-                    }}
-                  />
-                </Grid>
-              </Grid>
-            </Paper>
-          </Grid>
-		  )}
-		
-		  
-		 {/* EMPRESAS */}
-		 {user.super && (
-          <Grid item xs={12} sm={6} md={4}>
-            <Paper
-              className={classes.card00}
-              style={{ overflow: "hidden" }}
-              elevation={4}
-            >
-              <Grid container spacing={3}>
-                <Grid item xs={8}>
-                  <Typography
-                    component="h3"
-                    variant="h6"
-                    paragraph
-                  >
-                    Empresas
-                  </Typography>
-                  <Grid item>
-                    <Typography
-                      component="h1"
-                      variant="h4"
-                    >
+                  </div>
+                  <div className={classes.iconContainer} style={{ backgroundColor: "rgba(21, 170, 191, 0.1)" }}>
+                    <MobileFriendlyIcon style={{ fontSize: "28px", color: "#15aabf" }} />
+                  </div>
+                </div>
+              </Paper>
+            </Grid>
+          )}
+
+          {/* EMPRESAS */}
+          {user.super && (
+            <Grid item xs={12} sm={6} md={4}>
+              <Paper className={`${classes.card} ${classes.card00}`} elevation={0}>
+                <div style={{ display: "flex", width: "100%", justifyContent: "space-between", alignItems: "center" }}>
+                  <div>
+                    <Typography className={classes.cardTitle}>
+                      Empresas
+                    </Typography>
+                    <Typography className={classes.cardVal}>
                       {counters.totalCompanies}
                     </Typography>
-                  </Grid>
-                </Grid>
-                <Grid item xs={2}>
-                  <StoreIcon
-                    style={{
-                      fontSize: 100,
-                      color: "#FF34B3",
-                    }}
-                  />
-                </Grid>
-              </Grid>
-            </Paper>
-          </Grid>
-		  )}
+                  </div>
+                  <div className={classes.iconContainer} style={{ backgroundColor: "rgba(174, 62, 201, 0.1)" }}>
+                    <StoreIcon style={{ fontSize: "28px", color: "#ae3ec9" }} />
+                  </div>
+                </div>
+              </Paper>
+            </Grid>
+          )}
 
-          {/* EM ATENDIMENTO */}
+          {/* EM CONVERSA */}
           <Grid item xs={12} sm={6} md={4}>
-            <Paper
-              className={classes.card1}
-              style={{ overflow: "hidden" }}
-              elevation={4}
-            >
-              <Grid container spacing={3}>
-                <Grid item xs={8}>
-                  <Typography
-                    component="h3"
-                    variant="h6"
-                    paragraph
-                  >
+            <Paper className={`${classes.card} ${classes.card1}`} elevation={0}>
+              <div style={{ display: "flex", width: "100%", justifyContent: "space-between", alignItems: "center" }}>
+                <div>
+                  <Typography className={classes.cardTitle}>
                     Em Conversa
                   </Typography>
-                  <Grid item>
-                    <Typography
-                      component="h1"
-                      variant="h4"
-                    >
-                      {counters.supportHappening}
-                    </Typography>
-                  </Grid>
-                </Grid>
-                <Grid item xs={2}>
-                  <CallIcon
-                    style={{
-                      fontSize: 100,
-                      color: "#0b708c",
-                    }}
-                  />
-                </Grid>
-              </Grid>
+                  <Typography className={classes.cardVal}>
+                    {counters.supportHappening}
+                  </Typography>
+                </div>
+                <div className={classes.iconContainer} style={{ backgroundColor: "rgba(32, 180, 98, 0.1)" }}>
+                  <CallIcon style={{ fontSize: "28px", color: "#20B462" }} />
+                </div>
+              </div>
             </Paper>
           </Grid>
 
           {/* AGUARDANDO */}
           <Grid item xs={12} sm={6} md={4}>
-            <Paper
-              className={classes.card2}
-              style={{ overflow: "hidden" }}
-              elevation={6}
-            >
-              <Grid container spacing={3}>
-                <Grid item xs={8}>
-                  <Typography
-                    component="h3"
-                    variant="h6"
-                    paragraph
-                  >
+            <Paper className={`${classes.card} ${classes.card2}`} elevation={0}>
+              <div style={{ display: "flex", width: "100%", justifyContent: "space-between", alignItems: "center" }}>
+                <div>
+                  <Typography className={classes.cardTitle}>
                     Aguardando
                   </Typography>
-                  <Grid item>
-                    <Typography
-                      component="h1"
-                      variant="h4"
-                    >
-                      {counters.supportPending}
-                    </Typography>
-                  </Grid>
-                </Grid>
-                <Grid item xs={4}>
-                  <HourglassEmptyIcon
-                    style={{
-                      fontSize: 100,
-                      color: "#47606e",
-                    }}
-                  />
-                </Grid>
-              </Grid>
+                  <Typography className={classes.cardVal}>
+                    {counters.supportPending}
+                  </Typography>
+                </div>
+                <div className={classes.iconContainer} style={{ backgroundColor: "rgba(255, 146, 43, 0.1)" }}>
+                  <HourglassEmptyIcon style={{ fontSize: "28px", color: "#ff922b" }} />
+                </div>
+              </div>
             </Paper>
           </Grid>
 
-          {/* ATENDENTES ATIVOS */}
-			  {/*<Grid item xs={12} sm={6} md={4}>
-            <Paper
-              className={classes.card6}
-              style={{ overflow: "hidden" }}
-              elevation={6}
-            >
-              <Grid container spacing={3}>
-                <Grid item xs={8}>
-                  <Typography
-                    component="h3"
-                    variant="h6"
-                    paragraph
-                  >
-                    Conversas Ativas
-                  </Typography>
-                  <Grid item>
-                    <Typography
-                      component="h1"
-                      variant="h4"
-                    >
-                      {GetUsers()}
-                      <span
-                        style={{ color: "#805753" }}
-                      >
-                        /{attendants.length}
-                      </span>
-                    </Typography>
-                  </Grid>
-                </Grid>
-                <Grid item xs={4}>
-                  <RecordVoiceOverIcon
-                    style={{
-                      fontSize: 100,
-                      color: "#805753",
-                    }}
-                  />
-                </Grid>
-              </Grid>
-            </Paper>
-</Grid>*/}
-
           {/* FINALIZADOS */}
           <Grid item xs={12} sm={6} md={4}>
-            <Paper
-              className={classes.card3}
-              style={{ overflow: "hidden" }}
-              elevation={6}
-            >
-              <Grid container spacing={3}>
-                <Grid item xs={8}>
-                  <Typography
-                    component="h3"
-                    variant="h6"
-                    paragraph
-                  >
+            <Paper className={`${classes.card} ${classes.card3}`} elevation={0}>
+              <div style={{ display: "flex", width: "100%", justifyContent: "space-between", alignItems: "center" }}>
+                <div>
+                  <Typography className={classes.cardTitle}>
                     Finalizados
                   </Typography>
-                  <Grid item>
-                    <Typography
-                      component="h1"
-                      variant="h4"
-                    >
-                      {counters.supportFinished}
-                    </Typography>
-                  </Grid>
-                </Grid>
-                <Grid item xs={4}>
-                  <CheckCircleIcon
-                    style={{
-                      fontSize: 100,
-                      color: "#5852ab",
-                    }}
-                  />
-                </Grid>
-              </Grid>
+                  <Typography className={classes.cardVal}>
+                    {counters.supportFinished}
+                  </Typography>
+                </div>
+                <div className={classes.iconContainer} style={{ backgroundColor: "rgba(240, 62, 62, 0.1)" }}>
+                  <CheckCircleIcon style={{ fontSize: "28px", color: "#f03e3e" }} />
+                </div>
+              </div>
             </Paper>
           </Grid>
 
           {/* NOVOS CONTATOS */}
           <Grid item xs={12} sm={6} md={4}>
-            <Paper
-              className={classes.card4}
-              style={{ overflow: "hidden" }}
-              elevation={6}
-            >
-              <Grid container spacing={3}>
-                <Grid item xs={8}>
-                  <Typography
-                    component="h3"
-                    variant="h6"
-                    paragraph
-                  >
+            <Paper className={`${classes.card} ${classes.card4}`} elevation={0}>
+              <div style={{ display: "flex", width: "100%", justifyContent: "space-between", alignItems: "center" }}>
+                <div>
+                  <Typography className={classes.cardTitle}>
                     Novos Contatos
                   </Typography>
-                  <Grid item>
-                    <Typography
-                      component="h1"
-                      variant="h4"
-                    >
-                      {GetContacts(true)}
-                    </Typography>
-                  </Grid>
-                </Grid>
-                <Grid item xs={4}>
-                  <GroupAddIcon
-                    style={{
-                      fontSize: 100,
-                      color: "#8c6b19",
-                    }}
-                  />
-                </Grid>
-              </Grid>
+                  <Typography className={classes.cardVal}>
+                    {GetContacts(true)}
+                  </Typography>
+                </div>
+                <div className={classes.iconContainer} style={{ backgroundColor: "rgba(250, 176, 5, 0.1)" }}>
+                  <GroupAddIcon style={{ fontSize: "28px", color: "#fab005" }} />
+                </div>
+              </div>
             </Paper>
           </Grid>
 
-          
           {/* T.M. DE ATENDIMENTO */}
           <Grid item xs={12} sm={6} md={4}>
-            <Paper
-              className={classes.card8}
-              style={{ overflow: "hidden" }}
-              elevation={6}
-            >
-              <Grid container spacing={3}>
-                <Grid item xs={8}>
-                  <Typography
-                    component="h3"
-                    variant="h6"
-                    paragraph
-                  >
+            <Paper className={`${classes.card} ${classes.card8}`} elevation={0}>
+              <div style={{ display: "flex", width: "100%", justifyContent: "space-between", alignItems: "center" }}>
+                <div>
+                  <Typography className={classes.cardTitle}>
                     T.M. de Conversa
                   </Typography>
-                  <Grid item>
-                    <Typography
-                      component="h1"
-                      variant="h4"
-                    >
-                      {formatTime(counters.avgSupportTime)}
-                    </Typography>
-                  </Grid>
-                </Grid>
-                <Grid item xs={4}>
-                  <AccessAlarmIcon
-                    style={{
-                      fontSize: 100,
-                      color: "#7a3f26",
-                    }}
-                  />
-                </Grid>
-              </Grid>
+                  <Typography className={classes.cardVal}>
+                    {formatTime(counters.avgSupportTime)}
+                  </Typography>
+                </div>
+                <div className={classes.iconContainer} style={{ backgroundColor: "rgba(28, 126, 214, 0.1)" }}>
+                  <AccessAlarmIcon style={{ fontSize: "28px", color: "#1c7ed6" }} />
+                </div>
+              </div>
             </Paper>
           </Grid>
 
           {/* T.M. DE ESPERA */}
           <Grid item xs={12} sm={6} md={4}>
-            <Paper
-              className={classes.card9}
-              style={{ overflow: "hidden" }}
-              elevation={6}
-            >
-              <Grid container spacing={3}>
-                <Grid item xs={8}>
-                  <Typography
-                    component="h3"
-                    variant="h6"
-                    paragraph
-                  >
+            <Paper className={`${classes.card} ${classes.card9}`} elevation={0}>
+              <div style={{ display: "flex", width: "100%", justifyContent: "space-between", alignItems: "center" }}>
+                <div>
+                  <Typography className={classes.cardTitle}>
                     T.M. de Espera
                   </Typography>
-                  <Grid item>
-                    <Typography
-                      component="h1"
-                      variant="h4"
-                    >
-                      {formatTime(counters.avgWaitTime)}
-                    </Typography>
-                  </Grid>
-                </Grid>
-                <Grid item xs={4}>
-                  <TimerIcon
-                    style={{
-                      fontSize: 100,
-                      color: "#8a2c40",
-                    }}
-                  />
-                </Grid>
-              </Grid>
+                  <Typography className={classes.cardVal}>
+                    {formatTime(counters.avgWaitTime)}
+                  </Typography>
+                </div>
+                <div className={classes.iconContainer} style={{ backgroundColor: "rgba(230, 73, 128, 0.1)" }}>
+                  <TimerIcon style={{ fontSize: "28px", color: "#e64980" }} />
+                </div>
+              </div>
             </Paper>
           </Grid>
 		 
