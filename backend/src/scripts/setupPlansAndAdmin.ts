@@ -87,16 +87,20 @@ const run = async () => {
       }
     ];
 
-    for (const planData of plansData) {
-      const [plan, created] = await Plan.findOrCreate({
-        where: { name: planData.name },
-        defaults: planData
-      });
+    // Rename existing plans to temp names first to avoid unique name constraint violations
+    const existingPlans = await Plan.findAll();
+    for (const p of existingPlans) {
+      await p.update({ name: `temp_plan_${p.id}_${Math.floor(Math.random() * 10000)}` });
+    }
+    console.log("Renamed existing plans to temp names.");
 
-      if (!created) {
+    for (const planData of plansData) {
+      const plan = await Plan.findByPk(planData.id);
+      if (plan) {
         await plan.update(planData);
         console.log(`Plan '${planData.name}' updated.`);
       } else {
+        await Plan.create(planData);
         console.log(`Plan '${planData.name}' created.`);
       }
     }
