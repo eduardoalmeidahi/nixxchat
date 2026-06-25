@@ -87,7 +87,7 @@ const useStyles = makeStyles((theme) => ({
     zIndex: 2,
   },
   logoImg: {
-    height: "40px",
+    height: "80px",
   },
   badge: {
     display: "inline-flex",
@@ -437,18 +437,6 @@ const Login = () => {
           <img className={classes.mockupImg} src={heroImg} alt="Dashboard Mockup" />
         </div>
 
-        {/* RODAPÉ PARCEIROS */}
-        <div className={classes.footerPartners}>
-          <Typography className={classes.partnersText}>
-            Mais de 2.000 empresas já transformam seu atendimento com o Nixx Chat.
-          </Typography>
-          <div className={classes.partnersLogos}>
-            <span style={{ fontSize: "14px", fontWeight: "700", letterSpacing: "1px", color: "#a0aec0", marginRight: "15px" }}>ACME</span>
-            <span style={{ fontSize: "14px", fontWeight: "700", letterSpacing: "1px", color: "#a0aec0", marginRight: "15px" }}>CONSTRUTORA NORTE</span>
-            <span style={{ fontSize: "14px", fontWeight: "700", letterSpacing: "1px", color: "#a0aec0", marginRight: "15px" }}>CLÍNICA BEM CUIDAR</span>
-            <span style={{ fontSize: "14px", fontWeight: "700", letterSpacing: "1px", color: "#a0aec0" }}>ÓTICAS VISÃO</span>
-          </div>
-        </div>
       </div>
 
       {/* PAINEL DIREITO (FORMULÁRIO) */}
@@ -456,7 +444,7 @@ const Login = () => {
         <div className={classes.loginCard}>
           {/* LOGO CARD */}
           <div className={classes.cardLogoContainer}>
-            <img src={logo} alt="Nixx Chat" style={{ height: "45px" }} />
+            <img src={logo} alt="Nixx Chat" style={{ height: "80px" }} />
           </div>
 
           <Typography variant="h2" className={classes.cardTitle}>
