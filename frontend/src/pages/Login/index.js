@@ -105,7 +105,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "flex-start",
   },
   logoImg: {
-    height: "160px",
+    height: "260px",
     marginBottom: theme.spacing(2),
     objectFit: "contain",
     alignSelf: "flex-start",
