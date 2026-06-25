@@ -12,8 +12,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import IconButton from "@material-ui/core/IconButton";
-import Checkbox from "@material-ui/core/Checkbox";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
 import { toast } from "react-toastify";
 
 import MailOutlineIcon from "@material-ui/icons/MailOutline";
@@ -21,19 +19,14 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import SecurityIcon from "@material-ui/icons/Security";
-import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
 import ForumIcon from "@material-ui/icons/Forum";
-import AndroidIcon from "@material-ui/icons/Android";
+import PeopleIcon from "@material-ui/icons/People";
 import AssessmentIcon from "@material-ui/icons/Assessment";
-import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 
 import { versionSystem } from "../../../package.json";
-import { i18n } from "../../translate/i18n";
-import { nomeEmpresa } from "../../../package.json";
 import { AuthContext } from "../../context/Auth/AuthContext";
 
 import logo from "../../assets/logo.png";
-import heroImg from "../../assets/bg-login-mockup.png";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -45,30 +38,18 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "'Inter', sans-serif",
   },
   leftPanel: {
-    flex: 1.2,
-    background: "radial-gradient(circle at 10% 20%, #132538 0%, #060e15 90%)",
-    padding: theme.spacing(6),
+    flex: 1.1,
+    background: "radial-gradient(circle at 0% 0%, rgba(32, 180, 98, 0.04) 0%, rgba(255, 255, 255, 0) 50%), radial-gradient(circle at 100% 100%, rgba(32, 180, 98, 0.04) 0%, rgba(255, 255, 255, 0) 50%), #ffffff",
+    padding: theme.spacing(8),
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
+    alignItems: "center",
     position: "relative",
     overflow: "hidden",
-    color: "#ffffff",
+    color: "#1a202c",
     [theme.breakpoints.down("sm")]: {
       display: "none",
-    },
-    // Adding subtle glow/blur spots
-    "&::before": {
-      content: '""',
-      position: "absolute",
-      top: "10%",
-      right: "-10%",
-      width: "500px",
-      height: "500px",
-      borderRadius: "50%",
-      background: "radial-gradient(circle, rgba(32, 180, 98, 0.15) 0%, rgba(32, 180, 98, 0) 70%)",
-      filter: "blur(60px)",
-      zIndex: 1,
     },
   },
   rightPanel: {
@@ -77,154 +58,126 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#f8f9fa",
+    background: "radial-gradient(circle at 50% 50%, #0c1a30 0%, #050b14 100%)",
     padding: theme.spacing(4),
+    position: "relative",
+    overflow: "hidden",
+    // Glowing circles in corners
+    "&::before": {
+      content: '""',
+      position: "absolute",
+      top: "-10%",
+      right: "-10%",
+      width: "350px",
+      height: "350px",
+      borderRadius: "50%",
+      background: "radial-gradient(circle, rgba(32, 180, 98, 0.08) 0%, rgba(32, 180, 98, 0) 70%)",
+      filter: "blur(40px)",
+      zIndex: 1,
+    },
+    "&::after": {
+      content: '""',
+      position: "absolute",
+      bottom: "-10%",
+      left: "-10%",
+      width: "350px",
+      height: "350px",
+      borderRadius: "50%",
+      background: "radial-gradient(circle, rgba(32, 180, 98, 0.08) 0%, rgba(32, 180, 98, 0) 70%)",
+      filter: "blur(40px)",
+      zIndex: 1,
+    },
   },
-  logoHeader: {
+  leftContentWrapper: {
+    maxWidth: "500px",
     display: "flex",
-    alignItems: "center",
-    gap: "10px",
-    zIndex: 2,
+    flexDirection: "column",
+    alignItems: "flex-start",
   },
   logoImg: {
-    height: "80px",
-  },
-  badge: {
-    display: "inline-flex",
-    alignItems: "center",
-    gap: "6px",
-    padding: "6px 12px",
-    borderRadius: "20px",
-    backgroundColor: "rgba(32, 180, 98, 0.1)",
-    border: "1px solid rgba(32, 180, 98, 0.2)",
-    color: "#20B462",
-    fontSize: "12px",
-    fontWeight: "600",
-    marginBottom: theme.spacing(3),
-    width: "fit-content",
-    zIndex: 2,
+    height: "90px",
+    marginBottom: theme.spacing(6),
+    objectFit: "contain",
+    alignSelf: "flex-start",
   },
   heroTitle: {
-    fontSize: "40px",
+    fontSize: "32px",
     fontWeight: "800",
-    lineHeight: "1.2",
-    color: "#ffffff",
-    marginBottom: theme.spacing(2),
-    zIndex: 2,
+    lineHeight: "1.3",
+    color: "#0f172a",
+    marginBottom: theme.spacing(2.5),
+    textAlign: "left",
     "& span": {
       color: "#20B462",
     },
   },
   heroDesc: {
     fontSize: "15px",
-    color: "#a0aec0",
+    color: "#475569",
     lineHeight: "1.6",
-    marginBottom: theme.spacing(4),
-    maxWidth: "500px",
-    zIndex: 2,
+    marginBottom: theme.spacing(5),
+    textAlign: "left",
   },
   featuresList: {
     display: "flex",
     flexDirection: "column",
-    gap: "20px",
-    zIndex: 2,
+    gap: "24px",
+    width: "100%",
   },
   featureItem: {
     display: "flex",
     gap: "16px",
-    alignItems: "flex-start",
+    alignItems: "center",
   },
   featureIconContainer: {
-    padding: "10px",
-    borderRadius: "10px",
-    backgroundColor: "rgba(32, 180, 98, 0.1)",
+    padding: "12px",
+    borderRadius: "12px",
+    backgroundColor: "rgba(32, 180, 98, 0.08)",
     color: "#20B462",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+    width: "48px",
+    height: "48px",
   },
   featureTitle: {
-    fontSize: "14px",
+    fontSize: "15px",
     fontWeight: "700",
-    color: "#ffffff",
-    marginBottom: "4px",
+    color: "#0f172a",
+    marginBottom: "2px",
   },
   featureDesc: {
     fontSize: "13px",
-    color: "#a0aec0",
-  },
-  mockupContainer: {
-    position: "absolute",
-    right: "-80px",
-    top: "50%",
-    transform: "translateY(-50%)",
-    width: "580px",
-    height: "580px",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    zIndex: 2,
-    [theme.breakpoints.down("md")]: {
-      right: "-180px",
-      width: "480px",
-      height: "480px",
-    },
-  },
-  mockupImg: {
-    width: "100%",
-    height: "auto",
-    objectFit: "contain",
-  },
-  footerPartners: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "12px",
-    zIndex: 2,
-  },
-  partnersText: {
-    fontSize: "12px",
-    color: "#718096",
-  },
-  partnersLogos: {
-    display: "flex",
-    gap: "24px",
-    alignItems: "center",
-    flexWrap: "wrap",
-    opacity: 0.6,
+    color: "#64748b",
   },
   // Right side Card
   loginCard: {
     width: "100%",
-    maxWidth: "460px",
+    maxWidth: "440px",
     backgroundColor: "#ffffff",
     borderRadius: "16px",
-    boxShadow: "0 10px 30px rgba(0, 0, 0, 0.04)",
-    border: "1px solid rgba(0, 0, 0, 0.05)",
+    boxShadow: "0 20px 40px rgba(0, 0, 0, 0.25)",
     padding: "40px",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-  },
-  cardLogoContainer: {
-    marginBottom: theme.spacing(3),
-    display: "flex",
-    justifyContent: "center",
+    zIndex: 2,
   },
   cardTitle: {
-    fontSize: "24px",
+    fontSize: "26px",
     fontWeight: "700",
-    color: "#132538",
+    color: "#0f172a",
     marginBottom: "8px",
   },
   cardSubtitle: {
     fontSize: "14px",
-    color: "#718096",
+    color: "#64748b",
     marginBottom: theme.spacing(4),
   },
   inputLabel: {
     fontSize: "14px",
     fontWeight: "600",
-    color: "#4a5568",
+    color: "#475569",
     marginBottom: "6px",
     alignSelf: "flex-start",
     width: "100%",
@@ -233,32 +186,29 @@ const useStyles = makeStyles((theme) => ({
   textField: {
     marginBottom: theme.spacing(3),
     "& .MuiOutlinedInput-root": {
-      borderRadius: "10px",
+      borderRadius: "8px",
+      "&.Mui-focused fieldset": {
+        borderColor: "#20B462",
+      },
     },
-  },
-  rowActions: {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    width: "100%",
-    marginBottom: theme.spacing(3),
-  },
-  checkboxLabel: {
-    fontSize: "13px",
-    color: "#4a5568",
+    "& .MuiInputLabel-outlined.Mui-focused": {
+      color: "#20B462",
+    },
   },
   forgotLink: {
     fontSize: "13px",
     color: "#20B462",
     fontWeight: "600",
     textDecoration: "none",
+    alignSelf: "flex-end",
+    marginBottom: theme.spacing(3),
     "&:hover": {
       textDecoration: "underline",
     },
   },
   submitBtn: {
     height: "48px",
-    borderRadius: "10px",
+    borderRadius: "8px",
     backgroundColor: "#20B462",
     color: "#ffffff",
     fontWeight: "600",
@@ -267,27 +217,18 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    gap: "10px",
+    boxShadow: "none",
     "&:hover": {
       backgroundColor: "#199750",
+      boxShadow: "none",
     },
-  },
-  arrowCircle: {
-    width: "24px",
-    height: "24px",
-    borderRadius: "50%",
-    backgroundColor: "rgba(255, 255, 255, 0.2)",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    marginLeft: "8px",
   },
   divider: {
     display: "flex",
     alignItems: "center",
     width: "100%",
-    margin: "24px 0",
-    color: "#a0aec0",
+    margin: "20px 0",
+    color: "#94a3b8",
     fontSize: "12px",
     "&::before, &::after": {
       content: '""',
@@ -305,23 +246,25 @@ const useStyles = makeStyles((theme) => ({
   googleBtn: {
     height: "46px",
     width: "100%",
-    borderRadius: "10px",
-    border: "1px solid #e2e8f0",
+    borderRadius: "8px",
+    border: "1px solid #cbd5e1",
     backgroundColor: "#ffffff",
-    color: "#4a5568",
+    color: "#334155",
     fontSize: "14px",
     fontWeight: "600",
     textTransform: "none",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+    boxShadow: "none",
     "&:hover": {
-      backgroundColor: "#f7fafc",
+      backgroundColor: "#f8fafc",
+      boxShadow: "none",
     },
   },
   signupPrompt: {
     fontSize: "14px",
-    color: "#718096",
+    color: "#64748b",
     marginTop: "24px",
     "& a": {
       color: "#20B462",
@@ -337,12 +280,19 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "center",
     gap: "8px",
-    marginTop: "30px",
-    color: "#a0aec0",
-    fontSize: "11px",
+    marginTop: "24px",
+    color: "#94a3b8",
+    fontSize: "13px",
+    zIndex: 2,
+  },
+  copyrightFooter: {
+    position: "absolute",
+    bottom: "20px",
+    color: "#94a3b8",
+    fontSize: "12px",
     textAlign: "center",
-    maxWidth: "350px",
-    lineHeight: "1.4",
+    width: "100%",
+    zIndex: 2,
   },
 }));
 
@@ -356,7 +306,6 @@ const Login = () => {
   const classes = useStyles();
   const [user, setUser] = useState({ email: "", password: "" });
   const [showPassword, setShowPassword] = useState(false);
-  const [rememberMe, setRememberMe] = useState(true);
 
   const { handleLogin } = useContext(AuthContext);
 
@@ -377,38 +326,64 @@ const Login = () => {
     <div className={classes.root}>
       <CssBaseline />
       
-      {/* PAINEL ESQUERDO (HERO) */}
+      {/* PAINEL ESQUERDO (HERO - FUNDO BRANCO) */}
       <div className={classes.leftPanel}>
-        {/* CONTEÚDO CENTRAL */}
-        <div style={{ zIndex: 2, position: "relative", maxWidth: "480px" }}>
+        <div className={classes.leftContentWrapper}>
+          {/* LOGO EM DESTAQUE */}
+          <img className={classes.logoImg} src={logo} alt="Nixx Chat" />
+
+          {/* CONTEÚDO CENTRAL */}
           <Typography variant="h1" className={classes.heroTitle}>
-            Centralize seu atendimento com <span>inteligência.</span>
+            A plataforma WhatsApp CRM que <span>impulsiona</span> o seu negócio.
           </Typography>
           
           <Typography className={classes.heroDesc}>
-            Organize conversas, automatize processos e aumente suas vendas com o poder do WhatsApp e da inteligência de dados.
+            Centralize atendimentos, organize conversas e aumente suas vendas com mais eficiência.
           </Typography>
-        </div>
 
-        {/* ILUSTRAÇÃO FLUTUANTE (MOCKUP) */}
-        <div className={classes.mockupContainer}>
-          <img className={classes.mockupImg} src={heroImg} alt="Dashboard Mockup" />
+          {/* LISTA DE RECURSOS CLEAN */}
+          <div className={classes.featuresList}>
+            <div className={classes.featureItem}>
+              <div className={classes.featureIconContainer}>
+                <ForumIcon />
+              </div>
+              <div>
+                <Typography className={classes.featureTitle}>Atendimentos centralizados</Typography>
+                <Typography className={classes.featureDesc}>Todas as conversas do WhatsApp em um só lugar.</Typography>
+              </div>
+            </div>
+            
+            <div className={classes.featureItem}>
+              <div className={classes.featureIconContainer}>
+                <PeopleIcon />
+              </div>
+              <div>
+                <Typography className={classes.featureTitle}>Mais produtividade</Typography>
+                <Typography className={classes.featureDesc}>Automatize processos e ganhe tempo.</Typography>
+              </div>
+            </div>
+            
+            <div className={classes.featureItem}>
+              <div className={classes.featureIconContainer}>
+                <AssessmentIcon />
+              </div>
+              <div>
+                <Typography className={classes.featureTitle}>Resultados que importam</Typography>
+                <Typography className={classes.featureDesc}>Relatórios e métricas para decisões inteligentes.</Typography>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
-      {/* PAINEL DIREITO (FORMULÁRIO) */}
+      {/* PAINEL DIREITO (FORMULÁRIO - FUNDO ESCURO) */}
       <div className={classes.rightPanel}>
         <div className={classes.loginCard}>
-          {/* LOGO CARD */}
-          <div className={classes.cardLogoContainer}>
-            <img src={logo} alt="Nixx Chat" style={{ height: "80px" }} />
-          </div>
-
           <Typography variant="h2" className={classes.cardTitle}>
-            Acesse sua conta
+            Bem-vindo de volta!
           </Typography>
           <Typography className={classes.cardSubtitle}>
-            Entre para continuar gerenciando seus atendimentos.
+            Acesse sua conta para continuar
           </Typography>
 
           <form style={{ width: "100%" }} noValidate onSubmit={handlSubmit}>
@@ -419,7 +394,7 @@ const Login = () => {
               required
               fullWidth
               id="email"
-              placeholder="eduardoalmeida.hi@gmail.com"
+              placeholder="eduardo@almeida.com"
               name="email"
               value={user.email}
               onChange={handleChangeInput}
@@ -429,7 +404,7 @@ const Login = () => {
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    <MailOutlineIcon style={{ color: "#a0aec0" }} />
+                    <MailOutlineIcon style={{ color: "#94a3b8" }} />
                   </InputAdornment>
                 ),
               }}
@@ -442,7 +417,7 @@ const Login = () => {
               required
               fullWidth
               name="password"
-              placeholder="••••••••••••"
+              placeholder="••••••••"
               type={showPassword ? "text" : "password"}
               id="password"
               value={user.password}
@@ -452,7 +427,7 @@ const Login = () => {
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    <LockOutlinedIcon style={{ color: "#a0aec0" }} />
+                    <LockOutlinedIcon style={{ color: "#94a3b8" }} />
                   </InputAdornment>
                 ),
                 endAdornment: (
@@ -461,34 +436,18 @@ const Login = () => {
                       aria-label="toggle password visibility"
                       onClick={handleClickShowPassword}
                       edge="end"
-                      style={{ fontSize: "13px", color: "#718096" }}
+                      style={{ padding: "8px", color: "#94a3b8" }}
                     >
                       {showPassword ? <VisibilityOff /> : <Visibility />}
-                      <span style={{ fontSize: "12px", marginLeft: "4px", fontWeight: "600" }}>
-                        {showPassword ? "Ocultar" : "Mostrar"}
-                      </span>
                     </IconButton>
                   </InputAdornment>
                 ),
               }}
             />
 
-            <div className={classes.rowActions}>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={rememberMe}
-                    onChange={(e) => setRememberMe(e.target.checked)}
-                    color="primary"
-                    style={{ color: "#20B462" }}
-                  />
-                }
-                label={<span className={classes.checkboxLabel}>Lembrar-me</span>}
-              />
-              <Link component={RouterLink} to="/forgetpsw" className={classes.forgotLink}>
-                Esqueceu sua senha?
-              </Link>
-            </div>
+            <Link component={RouterLink} to="/forgetpsw" className={classes.forgotLink}>
+              Esqueceu sua senha?
+            </Link>
 
             <Button
               type="submit"
@@ -497,9 +456,6 @@ const Login = () => {
               className={classes.submitBtn}
             >
               Entrar
-              <div className={classes.arrowCircle}>
-                <ArrowForwardIcon style={{ fontSize: "14px", color: "#ffffff" }} />
-              </div>
             </Button>
 
             <div className={classes.divider}>ou</div>
@@ -514,17 +470,20 @@ const Login = () => {
             </Button>
 
             <div className={classes.signupPrompt}>
-              Ainda não tem uma conta? <Link component={RouterLink} to="/signup">Criar conta</Link>
+              Ainda não tem uma conta? <Link component={RouterLink} to="/signup">Registre-se</Link>
             </div>
           </form>
         </div>
 
+        {/* NOTA DE SEGURANÇA */}
         <div className={classes.securityFooter}>
-          <SecurityIcon style={{ fontSize: "14px", color: "#20B462" }} />
-          <span>
-            Seus dados protegidos com segurança.<br />
-            Criptografia de ponta a ponta e conformidade com a LGPD.
-          </span>
+          <SecurityIcon style={{ fontSize: "16px", color: "#20B462" }} />
+          <span>Seus dados estão protegidos com segurança.</span>
+        </div>
+
+        {/* COPYRIGHT */}
+        <div className={classes.copyrightFooter}>
+          Copyright <span style={{ color: "#20B462", fontWeight: "600" }}>PLW Design</span> • v {versionSystem} 2026.
         </div>
       </div>
     </div>
