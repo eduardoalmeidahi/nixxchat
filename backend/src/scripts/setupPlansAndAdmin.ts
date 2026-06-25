@@ -89,7 +89,7 @@ const run = async () => {
 
     for (const planData of plansData) {
       const [plan, created] = await Plan.findOrCreate({
-        where: { id: planData.id },
+        where: { name: planData.name },
         defaults: planData
       });
 
