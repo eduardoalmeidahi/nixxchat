@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(6),
     display: "flex",
     flexDirection: "column",
-    justifyContent: "space-between",
+    justifyContent: "center",
     position: "relative",
     overflow: "hidden",
     color: "#ffffff",
@@ -379,64 +379,21 @@ const Login = () => {
       
       {/* PAINEL ESQUERDO (HERO) */}
       <div className={classes.leftPanel}>
-        {/* LOGO SUPERIOR */}
-        <div className={classes.logoHeader}>
-          <img className={classes.logoImg} src={logo} alt="Nixx Chat" />
-        </div>
-
         {/* CONTEÚDO CENTRAL */}
-        <div style={{ zIndex: 2, position: "relative", marginTop: "40px" }}>
-          <div className={classes.badge}>
-            <CheckCircleIcon style={{ fontSize: "14px" }} />
-            Plataforma WhatsApp CRM
-          </div>
-          
+        <div style={{ zIndex: 2, position: "relative", maxWidth: "480px" }}>
           <Typography variant="h1" className={classes.heroTitle}>
-            Centralize seu<br />atendimento com<br /><span>inteligência.</span>
+            Centralize seu atendimento com <span>inteligência.</span>
           </Typography>
           
           <Typography className={classes.heroDesc}>
             Organize conversas, automatize processos e aumente suas vendas com o poder do WhatsApp e da inteligência de dados.
           </Typography>
-
-          <div className={classes.featuresList}>
-            <div className={classes.featureItem}>
-              <div className={classes.featureIconContainer}>
-                <ForumIcon />
-              </div>
-              <div>
-                <Typography className={classes.featureTitle}>Atendimento omnichannel</Typography>
-                <Typography className={classes.featureDesc}>Converse com seus clientes em um só lugar.</Typography>
-              </div>
-            </div>
-            
-            <div className={classes.featureItem}>
-              <div className={classes.featureIconContainer}>
-                <AndroidIcon />
-              </div>
-              <div>
-                <Typography className={classes.featureTitle}>Automação de conversas</Typography>
-                <Typography className={classes.featureDesc}>Crie fluxos inteligentes e ganhe tempo no dia a dia.</Typography>
-              </div>
-            </div>
-            
-            <div className={classes.featureItem}>
-              <div className={classes.featureIconContainer}>
-                <AssessmentIcon />
-              </div>
-              <div>
-                <Typography className={classes.featureTitle}>Métricas em tempo real</Typography>
-                <Typography className={classes.featureDesc}>Acompanhe resultados e tome decisões com mais precisão.</Typography>
-              </div>
-            </div>
-          </div>
         </div>
 
         {/* ILUSTRAÇÃO FLUTUANTE (MOCKUP) */}
         <div className={classes.mockupContainer}>
           <img className={classes.mockupImg} src={heroImg} alt="Dashboard Mockup" />
         </div>
-
       </div>
 
       {/* PAINEL DIREITO (FORMULÁRIO) */}
