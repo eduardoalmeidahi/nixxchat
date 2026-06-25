@@ -110,7 +110,7 @@ const run = async () => {
       where: { id: 1 },
       defaults: {
         name: "Nixx Suite",
-        planId: 1,
+        planId: 5,
         dueDate: "2030-12-31 23:59:59"
       }
     });
@@ -118,7 +118,7 @@ const run = async () => {
     if (!createdCompany) {
       await company.update({
         name: "Nixx Suite",
-        planId: 1
+        planId: 5
       });
       console.log("Default company updated.");
     } else {
