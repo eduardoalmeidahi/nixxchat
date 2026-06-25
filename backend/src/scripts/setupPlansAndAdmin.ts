@@ -1,6 +1,7 @@
 import sequelize from "../database";
 import Plan from "../models/Plan";
 import User from "../models/User";
+import Company from "../models/Company";
 
 const run = async () => {
   try {
@@ -98,6 +99,26 @@ const run = async () => {
       } else {
         console.log(`Plan '${planData.name}' created.`);
       }
+    }
+
+    // Create or update default company first
+    const [company, createdCompany] = await Company.findOrCreate({
+      where: { id: 1 },
+      defaults: {
+        name: "Nixx Suite",
+        planId: 1,
+        dueDate: "2030-12-31 23:59:59"
+      }
+    });
+
+    if (!createdCompany) {
+      await company.update({
+        name: "Nixx Suite",
+        planId: 1
+      });
+      console.log("Default company updated.");
+    } else {
+      console.log("Default company created.");
     }
 
     // Create or update superadmin user
