@@ -60,6 +60,6 @@ jobs:
               php artisan route:cache
               php artisan view:cache
             fi
-
+            sudo -n /usr/local/bin/restart-nixchat
             echo 'Deploy finalizado com sucesso.'
           "
