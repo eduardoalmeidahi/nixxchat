@@ -1,0 +1,6 @@
+Teste de deploy automatico NixxChat
+
+Este arquivo foi criado apenas para testar o fluxo de deploy automatico via GitHub Actions.
+Data: 2026-06-26
+
+Se o workflow rodar com sucesso, o GitHub Actions esta enviando os arquivos para a VPS e executando o restart automatico.
