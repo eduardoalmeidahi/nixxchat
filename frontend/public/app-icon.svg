@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Nixx Chat">
+  <defs>
+    <linearGradient id="bg" x1="80" y1="40" x2="440" y2="470" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#28C76F"/>
+      <stop offset="1" stop-color="#0B7A3B"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="14" stdDeviation="18" flood-color="#064E2C" flood-opacity="0.28"/>
+    </filter>
+  </defs>
+
+  <rect width="512" height="512" rx="112" fill="url(#bg)"/>
+
+  <g filter="url(#shadow)">
+    <path d="M134 159c0-17 20-26 33-15l178 150c19 16 8 47-17 47h-67l-95 77c-13 11-32 2-32-15V159Z" fill="#ffffff"/>
+    <path d="M178 222v116l72-58-72-58Z" fill="#28C76F" opacity="0.98"/>
+    <path d="M198 184l141 119H250l-52-44v-75Z" fill="#28C76F" opacity="0.98"/>
+    <circle cx="336" cy="173" r="30" fill="#ffffff" opacity="0.98"/>
+  </g>
+</svg>
