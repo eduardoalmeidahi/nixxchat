@@ -1750,29 +1750,45 @@ export const handleMessageIntegration = async (
   queueIntegration: QueueIntegrations,
   ticket: Ticket
 ): Promise<void> => {
-  const msgType = getTypeMessage(msg);
-
   if (queueIntegration.type === "n8n" || queueIntegration.type === "webhook") {
     if (queueIntegration?.urlN8N) {
+      // Monta o payload exatamente como documentado em INTEGRACOES.md para evitar problemas com BigInt
+      const payload = {
+        event: "message.created",
+        whatsappId: ticket.whatsappId,
+        companyId: ticket.companyId,
+        contact: {
+          id: ticket.contact?.id,
+          name: ticket.contact?.name,
+          number: ticket.contact?.number
+        },
+        message: {
+          id: msg.key?.id,
+          body: getBodyMessage(msg),
+          fromMe: msg.key?.fromMe || false,
+          type: getTypeMessage(msg)
+        }
+      };
+
       const options = {
         method: "POST",
         url: queueIntegration?.urlN8N,
         headers: {
           "Content-Type": "application/json"
         },
-        json: msg
+        json: payload
       };
       try {
         request(options, function (error, response) {
           if (error) {
-            throw new Error(error);
+            console.error("Erro no envio do webhook:", error);
           }
           else {
-            console.log(response.body);
+            console.log("Webhook disparado com sucesso. Status:", response?.statusCode);
           }
         });
       } catch (error) {
-        throw new Error(error);
+        console.error("Erro ao iniciar requisicao de webhook:", error);
       }
     }
 
