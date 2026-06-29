@@ -112,6 +112,17 @@ export const initWASocket = async (whatsapp: Whatsapp): Promise<Session> => {
           shouldIgnoreJid: jid => isJidBroadcast(jid),
         });
 
+        const originalSendMessage = wsocket.sendMessage.bind(wsocket);
+        wsocket.sendMessage = async (jid, content, options) => {
+          let targetJid = jid;
+          if (typeof jid === "string" && jid.includes("@lid")) {
+            if (jid.endsWith("@s.whatsapp.net")) {
+              targetJid = jid.replace("@s.whatsapp.net", "");
+            }
+          }
+          return originalSendMessage(targetJid, content, options);
+        };
+
         // wsocket = makeWASocket({
         //   version,
         //   logger: loggerBaileys,

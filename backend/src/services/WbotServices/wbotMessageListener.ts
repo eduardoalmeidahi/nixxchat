@@ -537,9 +537,10 @@ const verifyContact = async (
     profilePicUrl = `${process.env.FRONTEND_URL}/nopicture.png`;
   }
 
+  const isLid = msgContact.id.endsWith("@lid");
   const contactData = {
-    name: msgContact?.name || msgContact.id.replace(/\D/g, ""),
-    number: msgContact.id.replace(/\D/g, ""),
+    name: msgContact?.name || msgContact.id.split("@")[0],
+    number: isLid ? msgContact.id : msgContact.id.replace(/\D/g, ""),
     profilePicUrl,
     isGroup: msgContact.id.includes("g.us"),
     companyId,
