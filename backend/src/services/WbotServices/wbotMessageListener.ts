@@ -878,8 +878,7 @@ const verifyMediaMessage = async (
   try {
     await writeFileAsync(
       join(__dirname, "..", "..", "..", "public", media.filename),
-      media.data,
-      "base64"
+      media.data
     );
   } catch (err) {
     Sentry.captureException(err);
