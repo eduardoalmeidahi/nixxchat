@@ -111,6 +111,7 @@ export const initWASocket = async (whatsapp: Whatsapp): Promise<Session> => {
           msgRetryCounterCache,
           shouldIgnoreJid: jid => isJidBroadcast(jid),
         });
+        wsocket.store = store;
 
         const originalSendMessage = wsocket.sendMessage.bind(wsocket);
         wsocket.sendMessage = async (jid, content, options) => {

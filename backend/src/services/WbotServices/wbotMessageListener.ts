@@ -537,12 +537,20 @@ const verifyContact = async (
     profilePicUrl = `${process.env.FRONTEND_URL}/nopicture.png`;
   }
 
-  const isLid = msgContact.id.endsWith("@lid");
+  let contactId = msgContact.id;
+  if (msgContact.id.endsWith("@lid") && wbot.store?.contacts) {
+    const storeContact = wbot.store.contacts[msgContact.id];
+    if (storeContact?.phoneNumber) {
+      contactId = storeContact.phoneNumber;
+    }
+  }
+
+  const isLid = contactId.endsWith("@lid");
   const contactData = {
-    name: msgContact?.name || msgContact.id.split("@")[0],
-    number: isLid ? msgContact.id : msgContact.id.replace(/\D/g, ""),
+    name: msgContact?.name || contactId.split("@")[0],
+    number: isLid ? contactId : contactId.replace(/\D/g, ""),
     profilePicUrl,
-    isGroup: msgContact.id.includes("g.us"),
+    isGroup: contactId.includes("g.us"),
     companyId,
     whatsappId: wbot.id
   };
