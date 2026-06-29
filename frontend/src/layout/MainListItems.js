@@ -181,13 +181,13 @@ const MainListItems = (props) => {
       const companyId = user.companyId;
       const planConfigs = await getPlanCompany(undefined, companyId);
 
-      setShowCampaigns(planConfigs.plan.useCampaigns);
-      setShowKanban(planConfigs.plan.useKanban);
-      setShowOpenAi(planConfigs.plan.useOpenAi);
-      setShowIntegrations(planConfigs.plan.useIntegrations);
-      setShowSchedules(planConfigs.plan.useSchedules);
-      setShowInternalChat(planConfigs.plan.useInternalChat);
-      setShowExternalApi(planConfigs.plan.useExternalApi);
+      setShowCampaigns(planConfigs?.plan?.useCampaigns);
+      setShowKanban(planConfigs?.plan?.useKanban);
+      setShowOpenAi(planConfigs?.plan?.useOpenAi);
+      setShowIntegrations(planConfigs?.plan?.useIntegrations);
+      setShowSchedules(planConfigs?.plan?.useSchedules);
+      setShowInternalChat(planConfigs?.plan?.useInternalChat);
+      setShowExternalApi(planConfigs?.plan?.useExternalApi);
     }
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
