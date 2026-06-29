@@ -1007,7 +1007,7 @@ export const verifyMessage = async (
 };
 
 const isValidMsg = (msg: proto.IWebMessageInfo): boolean => {
-  if (msg.key.remoteJid === "status@broadcast") return false;
+  if (msg.key.remoteJid === "status@broadcast" || msg.key.remoteJid?.endsWith("@newsletter")) return false;
   try {
     const msgType = getTypeMessage(msg);
     if (!msgType) {
