@@ -34,7 +34,7 @@ jobs:
             --exclude ".env" \
             --exclude "storage" \
             --exclude "uploads" \
-            --exclude "public/uploads" \
+            --exclude "backend/public" \
             --exclude "node_modules" \
             --exclude "vendor" \
             -e "ssh -i ~/.ssh/deploy_key -p ${{ secrets.VPS_PORT }}" \

@@ -883,9 +883,13 @@ const verifyMediaMessage = async (
     media.filename = `${new Date().getTime()}.${ext}`;
   }
 
+  const publicDir = join(__dirname, "..", "..", "..", "public");
   try {
+    if (!fs.existsSync(publicDir)) {
+      fs.mkdirSync(publicDir, { recursive: true });
+    }
     await writeFileAsync(
-      join(__dirname, "..", "..", "..", "public", media.filename),
+      join(publicDir, media.filename),
       media.data
     );
   } catch (err) {
