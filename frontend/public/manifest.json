@@ -3,9 +3,9 @@
   "name": "Nixx Chat | Nixx Suite",
   "icons": [
     {
-      "src": "/app-icon.svg",
+      "src": "/logo.png",
       "sizes": "any",
-      "type": "image/svg+xml",
+      "type": "image/png",
       "purpose": "any maskable"
     },
     {
