@@ -2417,20 +2417,18 @@ const wbotMessageListener = async (wbot: Session, companyId: number): Promise<vo
 
       if (!messages) return;
 
-      messages.forEach(async (message: proto.IWebMessageInfo) => {
-
+      for (const message of messages) {
         const messageExists = await Message.count({
           where: { id: message.key.id!, companyId }
         });
 
         if (!messageExists) {
-
           // console.log('body-------------------:', message);
           await handleMessage(message, wbot, companyId);
           await verifyRecentCampaign(message, companyId);
           await verifyCampaignMessageAndCloseTicket(message, companyId);
         }
-      });
+      }
     });
 
     wbot.ev.on("messages.update", (messageUpdate: WAMessageUpdate[]) => {
