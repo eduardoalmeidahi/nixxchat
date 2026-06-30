@@ -19,6 +19,29 @@ jobs:
       - name: Baixar código do GitHub
         uses: actions/checkout@v4
 
+      - name: Instalar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Compilar Backend (no GitHub)
+        run: |
+          if [ -d backend ]; then
+            cd backend
+            npm install
+            npm run build
+            cd ..
+          fi
+
+      - name: Compilar Frontend (no GitHub)
+        run: |
+          if [ -d frontend ]; then
+            cd frontend
+            npm install
+            npm run build
+            cd ..
+          fi
+
       - name: Configurar SSH
         run: |
           mkdir -p ~/.ssh
@@ -39,6 +62,8 @@ jobs:
             --exclude "storage" \
             --exclude "uploads" \
             --exclude "backend/public" \
+            --exclude "backend/node_modules" \
+            --exclude "frontend/node_modules" \
             --exclude "node_modules" \
             --exclude "vendor" \
             -e "ssh -i ~/.ssh/deploy_key -p $PORT" \
@@ -57,15 +82,7 @@ jobs:
 
             if [ -d backend ]; then
               cd backend
-              npm install
-              npm run build
-              cd ..
-            fi
-
-            if [ -d frontend ]; then
-              cd frontend
-              npm install
-              npm run build
+              npm install --omit=dev --legacy-peer-deps
               cd ..
             fi
 
