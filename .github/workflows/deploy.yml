@@ -49,9 +49,18 @@ jobs:
               composer install --no-dev --prefer-dist --optimize-autoloader
             fi
 
-            if [ -f package.json ]; then
-              npm ci
+            if [ -d backend ]; then
+              cd backend
+              npm install
               npm run build
+              cd ..
+            fi
+
+            if [ -d frontend ]; then
+              cd frontend
+              npm install
+              npm run build
+              cd ..
             fi
 
             if [ -f artisan ]; then
