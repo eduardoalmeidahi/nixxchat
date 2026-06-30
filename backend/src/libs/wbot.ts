@@ -78,7 +78,17 @@ export const initWASocket = async (whatsapp: Whatsapp): Promise<Session> => {
 
         const { id, name, provider } = whatsappUpdate;
 
-        const { version, isLatest } = await fetchLatestBaileysVersion();
+        let version: [number, number, number] = [2, 3000, 1042343602];
+        let isLatest = true;
+        try {
+          const fetched = await fetchLatestBaileysVersion();
+          if (fetched && fetched.version && fetched.version[2] > version[2]) {
+            version = fetched.version as [number, number, number];
+            isLatest = fetched.isLatest;
+          }
+        } catch (err) {
+          logger.error(`Erro ao buscar versao do Baileys, usando a versao hardcoded: ${err}`);
+        }
         const isLegacy = provider === "stable" ? true : false;
 
         logger.info(`using WA v${version.join(".")}, isLatest: ${isLatest}`);
