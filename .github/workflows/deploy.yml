@@ -47,9 +47,6 @@ jobs:
           mkdir -p ~/.ssh
           echo "${{ secrets.VPS_SSH_KEY }}" > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
-          PORT="${{ secrets.VPS_PORT }}"
-          PORT="${PORT:-22}"
-          ssh-keyscan -p "$PORT" "${{ secrets.VPS_HOST }}" >> ~/.ssh/known_hosts
 
       - name: Enviar arquivos para VPS
         run: |
@@ -66,14 +63,14 @@ jobs:
             --exclude "frontend/node_modules" \
             --exclude "node_modules" \
             --exclude "vendor" \
-            -e "ssh -i ~/.ssh/deploy_key -p $PORT" \
+            -e "ssh -o StrictHostKeyChecking=no -i ~/.ssh/deploy_key -p $PORT" \
             ./ "${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:${{ secrets.VPS_PATH }}/"
 
       - name: Rodar comandos pós-deploy
         run: |
           PORT="${{ secrets.VPS_PORT }}"
           PORT="${PORT:-22}"
-          ssh -i ~/.ssh/deploy_key -p "$PORT" "${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}" "
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/deploy_key -p "$PORT" "${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}" "
             cd '${{ secrets.VPS_PATH }}'
 
             if [ -f composer.json ]; then
