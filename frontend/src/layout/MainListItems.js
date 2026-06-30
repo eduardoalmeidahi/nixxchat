@@ -155,7 +155,7 @@ const MainListItems = (props) => {
   const { getPlanCompany } = usePlans();
   
   const [version, setVersion] = useState(false);
-  
+  const [waVersion, setWaVersion] = useState(false);
   
   const { getVersion } = useVersion();
 
@@ -165,6 +165,7 @@ const MainListItems = (props) => {
     async function fetchVersion() {
       const _version = await getVersion();
       setVersion(_version.version);
+      setWaVersion(_version.waVersion);
     }
     fetchVersion();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -505,9 +506,8 @@ const MainListItems = (props) => {
                 <img style={{ width: "100%", padding: "10px" }} src={logo} alt="image" />            
               </Hidden> 
               */}
-              <Typography style={{ fontSize: "12px", padding: "10px", textAlign: "right", fontWeight: "bold" }}>
-                {`${version}`}
-
+              <Typography style={{ fontSize: "11px", padding: "10px", textAlign: "right", fontWeight: "bold" }}>
+                {`v${version}${waVersion ? ` (WA v${waVersion})` : ""}`}
               </Typography>
             </React.Fragment>
             }
