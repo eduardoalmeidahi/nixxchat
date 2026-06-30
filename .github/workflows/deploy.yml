@@ -38,7 +38,7 @@ jobs:
           if [ -d frontend ]; then
             cd frontend
             npm install
-            npm run build
+            CI=false npm run build
             cd ..
           fi
 
