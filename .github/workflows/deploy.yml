@@ -24,10 +24,14 @@ jobs:
           mkdir -p ~/.ssh
           echo "${{ secrets.VPS_SSH_KEY }}" > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
-          ssh-keyscan -p "${{ secrets.VPS_PORT }}" "${{ secrets.VPS_HOST }}" >> ~/.ssh/known_hosts
+          PORT="${{ secrets.VPS_PORT }}"
+          PORT="${PORT:-22}"
+          ssh-keyscan -p "$PORT" "${{ secrets.VPS_HOST }}" >> ~/.ssh/known_hosts
 
       - name: Enviar arquivos para VPS
         run: |
+          PORT="${{ secrets.VPS_PORT }}"
+          PORT="${PORT:-22}"
           rsync -az --delete \
             --exclude ".git" \
             --exclude ".github" \
@@ -37,12 +41,14 @@ jobs:
             --exclude "backend/public" \
             --exclude "node_modules" \
             --exclude "vendor" \
-            -e "ssh -i ~/.ssh/deploy_key -p ${{ secrets.VPS_PORT }}" \
+            -e "ssh -i ~/.ssh/deploy_key -p $PORT" \
             ./ "${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:${{ secrets.VPS_PATH }}/"
 
       - name: Rodar comandos pós-deploy
         run: |
-          ssh -i ~/.ssh/deploy_key -p "${{ secrets.VPS_PORT }}" "${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}" "
+          PORT="${{ secrets.VPS_PORT }}"
+          PORT="${PORT:-22}"
+          ssh -i ~/.ssh/deploy_key -p "$PORT" "${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}" "
             cd '${{ secrets.VPS_PATH }}'
 
             if [ -f composer.json ]; then
