@@ -548,12 +548,20 @@ const verifyContact = async (
     profilePicUrl = `${process.env.FRONTEND_URL}/nopicture.png`;
   }
 
-  const isGroup = msgContact.id.includes("g.us");
-  const isLid = msgContact.id.includes("@lid");
+  let contactId = msgContact.id;
+  if (msgContact.id.endsWith("@lid") && wbot.store?.contacts) {
+    const storeContact = wbot.store.contacts[msgContact.id];
+    if (storeContact?.phoneNumber) {
+      contactId = storeContact.phoneNumber;
+    }
+  }
+
+  const isGroup = contactId.includes("g.us");
+  const isLid = contactId.includes("@lid");
 
   const contactData = {
-    name: msgContact?.name || msgContact.id.replace(/\D/g, ""),
-    number: (isGroup || isLid) ? msgContact.id.replace(/\D/g, "") : normalizeWhatsAppNumber(msgContact.id),
+    name: msgContact?.name || contactId.split("@")[0],
+    number: (isGroup || isLid) ? contactId.replace(/\D/g, "") : normalizeWhatsAppNumber(contactId),
     profilePicUrl,
     isGroup,
     companyId,
@@ -886,11 +894,14 @@ const verifyMediaMessage = async (
     media.filename = `${new Date().getTime()}.${ext}`;
   }
 
+  const publicDir = join(__dirname, "..", "..", "..", "public");
   try {
+    if (!fs.existsSync(publicDir)) {
+      fs.mkdirSync(publicDir, { recursive: true });
+    }
     await writeFileAsync(
-      join(__dirname, "..", "..", "..", "public", media.filename),
-      media.data,
-      "base64"
+      join(publicDir, media.filename),
+      media.data
     );
   } catch (err) {
     Sentry.captureException(err);
@@ -1019,7 +1030,7 @@ export const verifyMessage = async (
 };
 
 const isValidMsg = (msg: proto.IWebMessageInfo): boolean => {
-  if (msg.key.remoteJid === "status@broadcast") return false;
+  if (msg.key.remoteJid === "status@broadcast" || msg.key.remoteJid?.endsWith("@newsletter")) return false;
   try {
     const msgType = getTypeMessage(msg);
     if (!msgType) {
@@ -2417,20 +2428,18 @@ const wbotMessageListener = async (wbot: Session, companyId: number): Promise<vo
 
       if (!messages) return;
 
-      messages.forEach(async (message: proto.IWebMessageInfo) => {
-
+      for (const message of messages) {
         const messageExists = await Message.count({
           where: { id: message.key.id!, companyId }
         });
 
         if (!messageExists) {
-
           // console.log('body-------------------:', message);
           await handleMessage(message, wbot, companyId);
           await verifyRecentCampaign(message, companyId);
           await verifyCampaignMessageAndCloseTicket(message, companyId);
         }
-      });
+      }
     });
 
     wbot.ev.on("messages.update", (messageUpdate: WAMessageUpdate[]) => {

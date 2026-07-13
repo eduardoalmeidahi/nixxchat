@@ -27,7 +27,7 @@ const typebotListener = async ({
     typebot
 }: Request): Promise<void> => {
 
-    if (msg.key.remoteJid === 'status@broadcast') return;
+    if (msg.key.remoteJid === 'status@broadcast' || msg.key.remoteJid?.endsWith('@newsletter')) return;
 
     const { urlN8N: url,
         typebotExpires,
