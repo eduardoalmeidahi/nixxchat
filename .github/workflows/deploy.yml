@@ -1,0 +1,94 @@
+name: Deploy NixxChat VPS
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-nixxchat-production
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    name: Deploy para VPS CloudPanel
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Baixar código do GitHub
+        uses: actions/checkout@v4
+
+      - name: Instalar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Compilar Backend (no GitHub)
+        run: |
+          if [ -d backend ]; then
+            cd backend
+            npm install
+            npm run build
+            cd ..
+          fi
+
+      - name: Compilar Frontend (no GitHub)
+        run: |
+          if [ -d frontend ]; then
+            cd frontend
+            npm install
+            CI=false npm run build
+            cd ..
+          fi
+
+      - name: Configurar SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.VPS_SSH_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+
+      - name: Enviar arquivos para VPS
+        run: |
+          PORT="${{ secrets.VPS_PORT }}"
+          PORT="${PORT:-22}"
+          rsync -az --delete \
+            --exclude ".git" \
+            --exclude ".github" \
+            --exclude ".env" \
+            --exclude "storage" \
+            --exclude "uploads" \
+            --exclude "backend/public" \
+            --exclude "backend/node_modules" \
+            --exclude "frontend/node_modules" \
+            --exclude "node_modules" \
+            --exclude "vendor" \
+            -e "ssh -o StrictHostKeyChecking=no -i ~/.ssh/deploy_key -p $PORT" \
+            ./ "${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:${{ secrets.VPS_PATH }}/"
+
+      - name: Rodar comandos pós-deploy
+        run: |
+          PORT="${{ secrets.VPS_PORT }}"
+          PORT="${PORT:-22}"
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/deploy_key -p "$PORT" "${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}" "
+            cd '${{ secrets.VPS_PATH }}'
+
+            if [ -f composer.json ]; then
+              composer install --no-dev --prefer-dist --optimize-autoloader
+            fi
+
+            if [ -d backend ]; then
+              cd backend
+              npm install --omit=dev --legacy-peer-deps
+              cd ..
+            fi
+
+            if [ -f artisan ]; then
+              php artisan migrate --force
+              php artisan config:cache
+              php artisan route:cache
+              php artisan view:cache
+            fi
+            sudo -n /usr/local/bin/restart-nixchat
+            echo 'Deploy finalizado com sucesso.'
+          "

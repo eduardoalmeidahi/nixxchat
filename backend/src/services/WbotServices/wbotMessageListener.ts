@@ -91,6 +91,16 @@ interface IMessage {
 
 export const isNumeric = (value: string) => /^-?\d+$/.test(value);
 
+export const normalizeWhatsAppNumber = (value: string): string => {
+  if (!value) return "";
+  let numberPart = value.split("@")[0];
+  numberPart = numberPart.replace(/\D/g, "");
+  if (numberPart.length === 13 && numberPart.startsWith("55")) {
+    numberPart = numberPart.substring(2);
+  }
+  return numberPart;
+};
+
 const writeFileAsync = promisify(writeFile);
 
 const multVecardGet = function (param: any) {
@@ -463,6 +473,7 @@ const getSenderMessage = (
 
 const getContactMessage = async (msg: proto.IWebMessageInfo, wbot: Session) => {
   const isGroup = msg.key.remoteJid.includes("g.us");
+  const isLid = msg.key.remoteJid.includes("@lid");
   const rawNumber = msg.key.remoteJid.replace(/\D/g, "");
   return isGroup
     ? {
@@ -471,7 +482,7 @@ const getContactMessage = async (msg: proto.IWebMessageInfo, wbot: Session) => {
     }
     : {
       id: msg.key.remoteJid,
-      name: msg.key.fromMe ? rawNumber : msg.pushName
+      name: msg.key.fromMe ? (isLid ? msg.pushName : rawNumber) : msg.pushName
     };
 };
 
@@ -537,16 +548,17 @@ const verifyContact = async (
     profilePicUrl = `${process.env.FRONTEND_URL}/nopicture.png`;
   }
 
+  const isGroup = msgContact.id.includes("g.us");
+  const isLid = msgContact.id.includes("@lid");
+
   const contactData = {
     name: msgContact?.name || msgContact.id.replace(/\D/g, ""),
-    number: msgContact.id.replace(/\D/g, ""),
+    number: (isGroup || isLid) ? msgContact.id.replace(/\D/g, "") : normalizeWhatsAppNumber(msgContact.id),
     profilePicUrl,
-    isGroup: msgContact.id.includes("g.us"),
+    isGroup,
     companyId,
     whatsappId: wbot.id
   };
-
-
 
   const contact = CreateOrUpdateContactService(contactData);
 
