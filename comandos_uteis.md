@@ -70,3 +70,9 @@ Define o proprietário correto dos arquivos da aplicação como o usuário do Cl
 ```bash
 chown -R api-nixxchat:api-nixxchat /var/www/nixxchat
 ```
+REINICIAR
+cd /home/nixxchat/htdocs/nixxchat.nixxsuite.com.br/backend
+npm install
+npm run build
+pm2 restart nixxchat-backend
+pm2 status
